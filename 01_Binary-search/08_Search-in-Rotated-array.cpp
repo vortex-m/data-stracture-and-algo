@@ -7,9 +7,12 @@ int SearchRotatedArray(int arr[], int n, int target)
    while (low <= high)
    {
       int mid = (low + high) / 2;
+
       if (arr[mid] == target)
          return mid;
-      else if (arr[mid] >= arr[low])
+
+
+      else if (arr[mid] >= arr[low]) //If sorted ? otherwise go for right
       {
          // Left
          if (arr[mid] >= target && arr[low] <= target)
@@ -24,13 +27,13 @@ int SearchRotatedArray(int arr[], int n, int target)
       else if (arr[mid] <= arr[high])
       {
          // Right
-         if (arr[mid] <= target && arr[low] <= target)
+         if (arr[mid] <= target && arr[high] >= target)
          {
-            high = mid - 1;
+            low = mid + 1;
          }
          else
          {
-            low = mid + 1;
+            high = mid - 1;
          }
       }
    }
@@ -41,5 +44,5 @@ int main()
 {
    int arr[] = {7, 8, 9, 1, 2, 3, 4};
    int n = sizeof(arr) / sizeof(int);
-   cout << "Position: " << SearchRotatedArray(arr, n, 4);
+   cout << "Position: " << SearchRotatedArray(arr, n, 8);
 }
